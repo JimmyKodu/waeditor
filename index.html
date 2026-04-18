@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>泰坦重铸时光服 武器战 WA 字符串编辑器</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>武器战 WA 字符串编辑器</h1>
+    <p class="subtitle">用于配置怒气、DOT、冲锋/拦截冷却与撕裂触发压制的语音提示规则</p>
+
+    <section class="card grid">
+      <label>
+        怒气高阈值（技能1）
+        <input id="rageHighThreshold" type="number" min="0" step="1" value="60" />
+      </label>
+      <label>
+        技能1语音内容
+        <input id="rageHighVoice" type="text" value="怒气高，使用技能1" />
+      </label>
+      <label>
+        怒气低阈值（技能2）
+        <input id="rageLowThreshold" type="number" min="0" step="1" value="25" />
+      </label>
+      <label>
+        技能2语音内容
+        <input id="rageLowVoice" type="text" value="怒气低，使用技能2" />
+      </label>
+      <label>
+        DOT名称
+        <input id="dotName" type="text" value="撕裂" />
+      </label>
+      <label>
+        缺少DOT语音内容
+        <input id="dotVoice" type="text" value="目标没有撕裂，及时补DOT" />
+      </label>
+      <label>
+        冲锋技能名
+        <input id="chargeName" type="text" value="冲锋" />
+      </label>
+      <label>
+        拦截技能名
+        <input id="interceptName" type="text" value="拦截" />
+      </label>
+      <label>
+        冷却对比语音内容
+        <input id="mobilityVoice" type="text" value="优先使用冷却更快的位移技能" />
+      </label>
+      <label>
+        撕裂触发压制周期（秒）
+        <input id="overpowerCycleSec" type="number" min="1" step="1" value="6" />
+      </label>
+    </section>
+
+    <section class="card">
+      <h2>实时预览</h2>
+      <div class="grid preview-grid">
+        <label>
+          当前怒气
+          <input id="previewRage" type="number" min="0" step="1" value="50" />
+        </label>
+        <label>
+          目标是否有DOT
+          <select id="previewHasDot">
+            <option value="true" selected>有</option>
+            <option value="false">没有</option>
+          </select>
+        </label>
+        <label>
+          冲锋剩余冷却（秒）
+          <input id="previewChargeCd" type="number" min="0" step="0.1" value="7" />
+        </label>
+        <label>
+          拦截剩余冷却（秒）
+          <input id="previewInterceptCd" type="number" min="0" step="0.1" value="15" />
+        </label>
+        <label>
+          撕裂剩余时间（秒）
+          <input id="previewRendRemaining" type="number" min="0" step="0.1" value="10" />
+        </label>
+        <label>
+          距上次压制触发已过（秒）
+          <input id="previewSinceLastProc" type="number" min="0" step="0.1" value="2" />
+        </label>
+      </div>
+      <button id="previewBtn" type="button">更新预览</button>
+      <pre id="previewOutput"></pre>
+    </section>
+
+    <section class="card">
+      <h2>WA 字符串</h2>
+      <div class="actions">
+        <button id="generateBtn" type="button">生成字符串</button>
+        <button id="parseBtn" type="button">载入字符串</button>
+      </div>
+      <textarea id="waString" rows="8" placeholder="点击“生成字符串”或粘贴后点击“载入字符串”"></textarea>
+      <p id="status" class="status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
