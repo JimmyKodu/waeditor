@@ -12,4 +12,4 @@
 
 ## 使用
 
-直接在浏览器打开 `/home/runner/work/waeditor/waeditor/index.html`。
+直接在浏览器打开 `index.html`。

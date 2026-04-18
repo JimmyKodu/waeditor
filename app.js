@@ -78,7 +78,11 @@
 
   function encodeWaString(config) {
     const json = JSON.stringify(config);
-    return PREFIX + btoa(unescape(encodeURIComponent(json)));
+    const bytes = new TextEncoder().encode(json);
+    const binary = Array.from(bytes, function (byte) {
+      return String.fromCharCode(byte);
+    }).join("");
+    return PREFIX + btoa(binary);
   }
 
   function decodeWaString(value) {
@@ -86,7 +90,11 @@
       throw new Error(`字符串格式错误，必须以 ${PREFIX} 开头`);
     }
     const encoded = value.slice(PREFIX.length);
-    const json = decodeURIComponent(escape(atob(encoded)));
+    const binary = atob(encoded);
+    const bytes = Uint8Array.from(binary, function (char) {
+      return char.charCodeAt(0);
+    });
+    const json = new TextDecoder().decode(bytes);
     return JSON.parse(json);
   }
 
